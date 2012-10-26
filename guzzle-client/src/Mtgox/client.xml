@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client>
+    <commands>
+
+        <!-- public commands -->
+
+        <command name="multi_currency_ticker" method="GET" uri="/api/1/BTC{{currency}}/ticker" class="\BitcoinExchangeRestApi\Command\DynamicCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Multi_Currency_Ticker</doc>
+            <param name="currency" type="string" required="true" min_length="3" max_length="3" doc="the currency code to retrieve the ticker for" />
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <command name="multi_currency_depth" method="GET" uri="/api/1/BTC{{currency}}/depth" class="\BitcoinExchangeRestApi\Command\DynamicCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Multi_Currency_Ticker</doc>
+            <param name="currency" type="string" required="true" min_length="3" max_length="3" doc="the currency code to retrieve the ticker for" />
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <command name="multi_currency_trades" method="GET" uri="/api/1/BTC{{currency}}/trades" class="\BitcoinExchangeRestApi\Command\DynamicCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Multi_currency_trades</doc>
+            <param name="currency" type="string" required="true" min_length="3" max_length="3" doc="the currency code to retrieve the ticker for" />
+            <param name="since" location="query" type="integer" required="false" doc="the trade id - to get only the trades since a given trade id" />
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <command name="cancelled_trades" method="GET" uri="/api/1/BTC{{currency}}/cancelledtrades" class="\BitcoinExchangeRestApi\Command\DynamicCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Cancelled_Trades</doc>
+            <param name="currency" type="string" required="true" min_length="3" max_length="3" doc="the currency code to retrieve the ticker for" />
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <command name="full_depth" method="GET" uri="/api/1/BTC{{currency}}/fulldepth" class="\BitcoinExchangeRestApi\Command\DynamicCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Full_Depth</doc>
+            <param name="currency" type="string" required="true" min_length="3" max_length="3" doc="the currency code to retrieve the ticker for" />
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <command name="transaction_information" method="GET" uri="/api/1/generic/bitcoin/tx_details" class="\BitcoinExchangeRestApi\Command\DynamicCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#transaction_information</doc>
+            <param name="hash" location="query" type="string" required="true" doc="the transaction hash to look up details for" />
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <command name="block_information" method="GET" uri="/api/1/generic/bitcoin/block_list_tx" class="\BitcoinExchangeRestApi\Command\DynamicCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#block_information</doc>
+            <param name="depth" location="query" type="string" required="false" doc="the depth (the block number) to look up block information for (required if hash isn't provided)" />
+            <param name="hash" location="query" type="string" required="false" doc="the block hash to look up block information for (required if depth isn't provided)" />
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <command name="address_information" method="GET" uri="/api/1/generic/bitcoin/addr_details" class="\BitcoinExchangeRestApi\Command\DynamicCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#address_information</doc>
+            <param name="hash" location="query" type="string" required="true" doc="the hash to look up address information for" />
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <command name="order_lag" method="GET" uri="/api/1/generic/order/lag" class="\BitcoinExchangeRestApi\Command\DynamicCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Order_lag</doc>
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <command name="currency_information" method="GET" url="/api/1/generic/currency" class="\BitcoinExchangeRestApi\Command\DynamicCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Currency_information</doc>
+            <param name="currency" location="query" type="string" required="true" min_length="3" max_length="3" doc="the currency code to retrieve information about" />
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+
+        <!-- private commands (required API-Key and API-Secret -->
+        <command name="info" method="POST" uri="/api/1/generic/private/info" class="\Mtgox\Command\PrivateCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Private_info</doc>
+            <param name="raw" location="post_field" type="boolean" required="0" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <command name="address" method="POST" uri="/api/1/generic/bitcoin/address" class="\Mtgox\Command\PrivateCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#get_a_bitcoin_deposit_address</doc>
+            <param name="description" location="body" type="string" required="false" doc="a description for the address , a new description will generate a new address" />
+            <param name="ipn" location="post_field" type="string" required="false" doc="an URL that will be pinged when this new address receives a transaction, the ping is a POST request with txid, blockid, description . . . as parameters" />
+            <param name="raw" location="post_field" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command>
+        <!-- TODO: https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#redeem_a_private_key -->
+        <!-- TODO: https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#redeem_a_wallet.dat -->
+        <!-- TODO: https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#idKey -->
+
+        <!-- TODO: this command is not working as spec'd in the docs: -->
+        <!-- command name="trades" method="GET" uri="/api/1/BTC{currency}/private/trades" class="\BitcoinExchangeRestApi\Command\PrivateCommand  ">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Your_trade_history</doc>
+            <param name="currency" type="string" required="true" min_length="3" max_length="3" default="USD" doc="the currency code to retrieve trade history for" />
+            <param name="raw" location="query" type="boolean" required="false" doc="if set to true, only the 'return' portion of the API response is returned and metadata is excluded" />
+        </command> -->
+
+        <command name="wallet_history" method="POST" uri="/api/1/generic/private/wallet/history" class="\Mtgox\Command\PrivateCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Your_wallet_history</doc>
+            <param name="currency" location="post_field" type="string" required="true" min_length="3" max_length="3" doc="the currency code to retrieve the wallet history for" />
+            <param name="type" location="post_field" type="enum:bid,ask" required="false" doc="the type of trades to retrieve wallet history for, e.g. 'bid' or 'ask' " />
+            <param name="date_start" location="post_field" type="timestamp" required="false" doc="the starting date to retrieve wallet trade history for" />
+            <param name="date_end" location="post_field" type="timestamp" required="false" doc="the ending date to retrieve wallet trade history for" />
+            <param name="trade_id" location="post_field" type="integer" required="false" doc="the ID of a specific trade to receive associate wallet history for" />
+            <param name="page" location="post_field" type="integer" required="false" doc="the pagination page index of data to retrieve wallet history for" />
+        </command>
+
+        <!-- TODO: untested -->
+        <command name="order_add" method="POST" uri="/api/1/BTC{currency}/private/order/add" class="\Mtgox\Command\PrivateCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Submit_an_order</doc>
+            <param name="currency" type="string" required="true" min_length="3" max_length="3" doc="the currency code to create this trade in, e.g. USD, EUR, GBP" />
+            <param name="type" location="post_field" type="enum:bid,ask" required="true" doc="the type of trade to create" />
+            <param name="amount_int" location="post_field" type="integer" required="true" doc="the amount of BTC for this trade expressed as an integer" />
+            <param name="price_int" location="post_field" type="integer" required="false" doc="the price to pay; leave blank for a market order" />
+        </command>
+
+        <command name="open_orders" method="POST" uri="/api/1/generic/private/orders" class="\Mtgox\Command\PrivateCommand">
+            <doc>https://en.bitcoin.it/wiki/MtGox/API/HTTP/v1#Your_open_orders</doc>
+        </command>
+
+    </commands>
+</client>

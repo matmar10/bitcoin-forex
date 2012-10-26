@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<client>
+    <commands>
+
+        <command name="balance" method="GET" uri="balance" class="\Blockchain\Command\BlockchainCommand">
+            <doc>https://blockchain.info/api/api_send</doc>
+        </command>
+
+        <command name="payment" method="GET" uri="payment" class="\Blockchain\Command\BlockchainCommand">
+            <doc>https://blockchain.info/api/api_send</doc>
+            <param name="to" location="query" type="string" required="true" doc="Recipient Bitcoin Address or Label." />
+            <param name="amount" location="query" type="integer" required="true" doc="Amount to send in Satoshi" />
+            <param name="from" location="query" type="string" required="false" doc="Send from a specific Bitcoin address or label." />
+        </command>
+
+    </commands>
+</client>

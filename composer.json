@@ -4,5 +4,12 @@
         "php": ">=5.3.0",
         "guzzle/guzzle": "v2.8.8",
         "ddeboer/guzzle-bundle": "v1.0.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "BitcoinExchangeRestApi": "guzzle-client/src",
+            "Blockchain": "guzzle-client/src",
+            "Mtgox": "guzzle-client/src"
+        }
     }
 }

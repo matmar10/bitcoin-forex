@@ -3,6 +3,6 @@
     "require": {
         "php": ">=5.3.0",
         "guzzle/guzzle": "v2.8.8",
-        "ddeboer/guzzle-bundle": "dev-master"
+        "ddeboer/guzzle-bundle": "v1.0.0"
     }
 }
